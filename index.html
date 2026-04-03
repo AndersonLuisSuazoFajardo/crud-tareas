@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TaskFlow — Gestor de Tareas</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="bg-grid"></div>
+
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">TaskFlow</span>
+    </div>
+    <div class="header-meta">
+      <span id="task-count">0 tareas</span>
+      <span class="version-tag">v1.0.0</span>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Formulario -->
+    <section class="form-panel">
+      <h2 class="panel-title">
+        <span id="form-mode-label">Nueva Tarea</span>
+        <span class="title-accent">_</span>
+      </h2>
+
+      <div class="form-group">
+        <label for="task-title">Título</label>
+        <input type="text" id="task-title" placeholder="¿Qué hay que hacer?" maxlength="80"/>
+      </div>
+
+      <div class="form-group">
+        <label for="task-desc">Descripción</label>
+        <textarea id="task-desc" placeholder="Detalles opcionales..." rows="3"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="task-priority">Prioridad</label>
+          <select id="task-priority">
+            <option value="baja">🟢 Baja</option>
+            <option value="media" selected>🟡 Media</option>
+            <option value="alta">🔴 Alta</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="task-due">Fecha límite</label>
+          <input type="date" id="task-due"/>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button id="btn-save" class="btn btn-primary" onclick="saveTask()">
+          <span>Guardar Tarea</span>
+          <span class="btn-arrow">→</span>
+        </button>
+        <button id="btn-cancel" class="btn btn-ghost" onclick="cancelEdit()" style="display:none">
+          Cancelar
+        </button>
+      </div>
+
+      <div id="form-message" class="form-message"></div>
+    </section>
+
+    <!-- Lista -->
+    <section class="list-panel">
+      <div class="list-header">
+        <h2 class="panel-title">
+          Mis Tareas <span class="title-accent">_</span>
+        </h2>
+
+        <div class="list-controls">
+          <input type="text" id="search-input" placeholder="Buscar..." oninput="renderTasks()"/>
+          <select id="filter-status" onchange="renderTasks()">
+            <option value="todas">Todas</option>
+            <option value="pendiente">Pendientes</option>
+            <option value="completada">Completadas</option>
+          </select>
+          <select id="filter-priority" onchange="renderTasks()">
+            <option value="todas">Todas las prioridades</option>
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="task-list" class="task-list">
+        <div class="empty-state">
+          <span class="empty-icon">◌</span>
+          <p>No hay tareas aún.<br/>¡Agrega la primera!</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal confirmación -->
+  <div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <h3>¿Eliminar tarea?</h3>
+      <p>Esta acción no se puede deshacer.</p>
+      <div class="modal-actions">
+        <button class="btn btn-danger" onclick="confirmDelete()">Eliminar</button>
+        <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
