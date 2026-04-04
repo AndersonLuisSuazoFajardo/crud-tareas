@@ -65,7 +65,7 @@ Cada rama genera 3 Pull Requests:
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/TU_USUARIO/crud-tareas.git
+   git clone https://github.com/AndersonLuisSuazoFajardo/crud-tareas.git
    ```
 2. Abre `index.html` en tu navegador.
 3. ¡Listo! No requiere instalación ni servidor.
